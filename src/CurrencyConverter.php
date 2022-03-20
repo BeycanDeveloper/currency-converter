@@ -113,7 +113,7 @@ final class CurrencyConverter
         $response = json_decode(curl_exec($curl));
 
         if (isset($response->data)) {
-            $result = $this->toFixed($response->data->quote->{strtoupper($to)}->price);
+            $result = $response->data->quote->{strtoupper($to)}->price;
         } else {
             $result = null;
         }
@@ -142,7 +142,7 @@ final class CurrencyConverter
         $convertData = json_decode(file_get_contents($apiUrl));
         if (isset($convertData->$to)) {
             $price = $amount * $convertData->$to;
-            return $this->toFixed($price);
+            return $price;
         } else {
             return null;
         }
